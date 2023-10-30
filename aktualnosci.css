@@ -1,0 +1,36 @@
+/* Stylizacja dla sekcji aktualności */
+.news-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item h2 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.news-item p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Małe dostosowania na urządzeniach mobilnych */
+@media (max-width: 768px) {
+    .news-container {
+        margin: 10px;
+        padding: 10px;
+    }
+}
