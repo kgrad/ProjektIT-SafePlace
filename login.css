@@ -1,0 +1,54 @@
+
+body {
+
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    
+}
+
+.form__input-container{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 7px
+}
+
+form{
+    width: auto;
+    padding: 14px 20px;
+    margin: 8px 0;
+    display: inline;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    position: absolute;
+    top: 30%;
+
+}
+
+.log:hover{
+    opacity: 0.8;
+}
+
+.log{
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin:  8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 7px
+    
+}
+
+span.password {
+    display: block;
+    float: none;
+  
+}
+

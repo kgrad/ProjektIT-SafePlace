@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles/login.css" />
+    <link rel="stylesheet" href="login.css" />
 </head>
+
 <body>
+    
     <form autocomplete="off">
         <div class="form__input-container">
-            <label for="user">User</label>
-            <input id="user" type="text">
+            <label for="user"><b>Login</label></b></label>
+            <input id="user" type="text" placeholder="wpisz swój login..." name="user" required/>
         </div>
         <div class="form__input-container">
-            <label for="password">password</label>
-            <input id="password" type="password"/>
+            <label for="password"><b>Hasło</label></b></label>
+            <input id="password" type="password" placeholder="********" name="password" required/>
         </div>
-        <button>Login</button>
+        <button type="submit" class="log">zaloguj</button>
+            <label>
+                <input type="checkbox" id="remember"> Zapamiętaj mnie 
+            </label>
+        <div>
+            <span class="password">
+                <a href="#" class="forget">nie pamiętam hasła</a>
+            </span>
+        </div>
     </form>
     
 </body>
+
+
 </html>
