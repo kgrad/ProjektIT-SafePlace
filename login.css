@@ -51,4 +51,22 @@ span.password {
     float: none;
   
 }
+.login-link {
+    position: absolute;
+    top: 10px;
+    background-color: #333; 
+    color: #fff; 
+    padding: 5px 12px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+}
 
+.login-link:hover {
+    background-color: #235a93; 
+}
+
+
+
+.login-link {
+    right: 10px;
+}

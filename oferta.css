@@ -43,3 +43,33 @@
         width: 100%;
     }
 }
+.hidden {
+    display: none;
+}
+/* Przyciski kategorii będą teraz wyglądały jak linki */
+/* Przywrócenie stylów dla przycisków kategorii */
+.categories-section button {
+    background-color: #f0f0f0; /* Tło przycisku */
+    border: 1px solid #ddd; /* Ramka przycisku */
+    padding: 10px 15px; /* Wewnętrzne odstępy przycisku */
+    text-align: left; /* Wyrównanie tekstu do lewej */
+    display: block; /* Wyświetlanie przycisku jako blok */
+    width: 100%; /* Szerokość przycisku */
+    color: #333; /* Kolor tekstu */
+    text-decoration: none; /* Brak podkreślenia */
+    transition: background-color 0.3s; /* Animacja tła */
+}
+
+.categories-section button:hover {
+    background-color: #e9e9e9; /* Zmiana tła po najechaniu kursorem */
+    border-color: #ccc; /* Zmiana ramki po najechaniu kursorem */
+}
+
+.categories-section ul {
+    padding: 0; /* Resetowanie odstępów dla listy */
+    list-style-type: none; /* Usunięcie punktorów */
+}
+
+.categories-section li {
+    margin-bottom: 5px; /* Odstępy między przyciskami */
+}

@@ -20,7 +20,7 @@
             <li><a href="index.html">Strona główna</a></li>
             <li><a href="oferta.html">Oferta</a></li>
             <li><a href="aktualnosci.html">Aktualności</a></li>
-            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="kontakt.php">Kontakt</a></li>
         </ul>
     </nav>
 
@@ -37,34 +37,38 @@
             <div class="categories-section">
                 <h2>Kategorie Sejfów</h2>
                 <ul>
-                    <li><a href="#domowe">Sejfy z certyfikatem 80+</a></li>
-                    <li><a href="#biurowe">Sejfy z certyfikatem 80+ Bronze</a></li>
-                    <li><a href="#hotelowe">Sejfy z certyfikatem 80+ Silver</a></li>
-                    <li><a href="#ognioodporne">Sejfy z certyfikatem 80+ Gold</a></li>
-                    <li><a href="#antywlamaniowe">Sejfy z certyfikatem 80+ Platinum</a></li>
+                    <li><button data-category="80+">Sejfy z certyfikatem 80+</button></li>
+                    <li><button data-category="80+ Bronze">Sejfy z certyfikatem 80+ Bronze</button></li>
+                    <li><button data-category="80+ Silver">Sejfy z certyfikatem 80+ Silver</button></li>
+                    <li><button data-category="80+ Gold">Sejfy z certyfikatem 80+ Gold</button></li>
+                    <li><button data-category="80+ Platinum">Sejfy z certyfikatem 80+ Platinum</button></li>
                 </ul>
             </div>
-
+            
             <!-- Sekcja ofert -->
-            <!-- Sekcja ofert -->
-<div class="offers-section">
-    <h2>Nasza Oferta</h2>
-    <div class="offers-grid">
-        <!-- Produkty (9 przykładowych produktów) -->
-        <!-- Pętla generująca produkty -->
-        <!-- Zamiast "https://via.placeholder.com/200?text=Sejf" można wstawić rzeczywiste zdjęcia produktów -->
-        <!-- Dane produktów można dostosować -->
-        <!-- Przykład 1 -->
-        <div class="offer-item">
-            <img src="https://via.placeholder.com/200?text=Sejf" alt="Sejf">
-            <h3>Sejf Titanium Model A</h3>
-            <p>Pojemność: 20L</p>
-            <p>Cena: 20zł na miesiąc</p>
-        </div>
-        <!-- ... Tu będą kolejne produkty ... -->
+            <div class="offers-section">
+                <h2>Nasza Oferta</h2>
+                <div class="offers-grid" id="products">
+                    <!-- Produkty (9 przykładowych produktów) -->
+                    <!-- Przykład 1 -->
+                    <div class="offer-item" data-category="80+">
+                        <img src="https://via.placeholder.com/200?text=Sejf" alt="Sejf">
+                        <h3>Sejf Titanium Model A</h3>
+                        <p>Pojemność: 20L</p>
+                        <p>Cena: 20zł na miesiąc</p>
+                    </div>
+                    <!-- Przykład 2 - nowy produkt -->
+                    <div class="offer-item" data-category="80+ Silver">
+                        <img src="https://via.placeholder.com/200?text=Sejf+Silver" alt="Sejf Silver">
+                        <h3>Sejf Silver Model X</h3>
+                        <p>Pojemność: 30L</p>
+                        <p>Cena: 30zł na miesiąc</p>
+                    </div>
+                    <!-- ... Tu będą kolejne produkty ... -->
+                </div>
+            </div>
+            <script src="script.js"></script>
     </div>
-</div>
-        </div>
     </main>
 
     <!-- Stopka -->
