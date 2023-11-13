@@ -1,8 +1,8 @@
 <?php
 // db_connection.php
-$servername = "your_servername";
-$username = "your_username";
-$password = "your_password";
+$servername = "localhost";
+$username = "safeplace";
+$password = "Safeplace321";
 $dbname = "safeplace";
 
 // Create connection
