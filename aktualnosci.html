@@ -1,68 +1,52 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafePlace - Aktualności</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="aktualnosci.css">
-
+    <title>Panel Klienta</title>
+    <link rel="stylesheet" href="styles/user.css">
 </head>
 <body>
-
-    <!-- Logo firmy -->
-    <div class="logo-container">
-        <img src="https://via.placeholder.com/150?text=Logo+SafePlace" alt="Logo SafePlace">
-    </div>
-
-    <!-- Nawigacja -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Strona główna</a></li>
-            <li><a href="oferta.html">Oferta</a></li>
-            <li><a href="aktualnosci.html">Aktualności</a></li>
-            <li><a href="kontakt.php">Kontakt</a></li>
-        </ul>
-    </nav>
-
-    <!-- Link do logowania i rejestracji -->
     <header>
-        <a href="register.html" class="reg-link">Załóż konto</a>
-        <a href="login.html" class="login-link">Zaloguj się</a>
+        <h1>Panel Klienta</h1>
     </header>
 
-    <!-- Główna zawartość -->
-    <main>
-        <div class="news-container">
-            <!-- Aktualność 1 -->
-            <div class="news-item">
-                <h2>Premiera nowej linii sejfów antywłamaniowych</h2>
-                <p>Data: 2023-11-05</p>
-                <p>Mamy przyjemność zaprezentować naszą najnowszą linię sejfów antywłamaniowych, które wyznaczają nowe standardy w branży. Modele te wyposażone są w zaawansowane systemy zabezpieczeń oraz innowacyjne rozwiązania technologiczne.</p>
-            </div>
+    <nav>
+        <a href="#rozliczenia">Rozliczenia</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#profil">Profil</a>
+        <a href="#wyloguj" style="float: right;" class="logout-btn">Wyloguj</a>
+    </nav>
 
-            <!-- Aktualność 2 -->
-            <div class="news-item">
-                <h2>SafePlace otwiera nową siedzibę w Krakowie</h2>
-                <p>Data: 2023-10-15</p>
-                <p>Z radością informujemy, że nasza firma rozszerza swoją obecność w Polsce, otwierając nową siedzibę w Krakowie. Nowe biuro pozwoli nam lepiej służyć naszym klientom w południowej Polsce.</p>
-            </div>
-
-            <!-- Aktualność 3 -->
-            <div class="news-item">
-                <h2>SafePlace zdobywa nagrodę za innowacyjność</h2>
-                <p>Data: 2023-09-30</p>
-                <p>Jesteśmy dumni z otrzymania prestiżowej nagrody za innowacyjność w kategorii produktów zabezpieczających. To wyróżnienie potwierdza nasze zaangażowanie w dostarczanie produktów najwyższej jakości naszym klientom.</p>
-            </div>
+    <section>
+        <h2>Saldo dla poszczególnych sejfów</h2>
+        <div class="saldo">
+            <p><strong>Sejf 1:</strong> 1000.00 PLN</p>
+            <p><strong>Sejf 2:</strong> 500.00 PLN</p>
         </div>
-    </main>
 
-    <!-- Stopka -->
-    <footer>
-        <p>SafePlace Sp. z o.o.</p>
-        <p>Główna siedziba: ul. Bezpieczna 123, 00-999 Warszawa</p>
-        <p>Email: kontakt@safeplace.pl | Tel: +48 123 456 789</p>
-    </footer>
-
+        <h2>Transakcje</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Opis</th>
+                    <th>Kwota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-01-01</td>
+                    <td>przelew</td>
+                    <td>500.00 PLN</td>
+                </tr>
+                <tr>
+                    <td>2023-02-15</td>
+                    <td>Opłata za usługę sejfu</td>
+                    <td>50.00 PLN</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 </body>
 </html>
