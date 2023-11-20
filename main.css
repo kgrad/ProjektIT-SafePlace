@@ -1,187 +1,56 @@
-/* Resetowanie stylów */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-}
+<?php
+include 'db-polaczenie.php'; // Include the database connection file
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-}
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $login_kli = $_POST['login']; // Get login from form
+    $haslo_kli = $_POST['password']; // Get password from form
 
-/* Logo */
-.logo-container {
-    text-align: center;
-    margin: 20px 0;
-}
+    // Prepare a select statement
+    $sql = "SELECT Nr_klienta FROM klient WHERE login_kli = ? AND haslo_kli = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $login_kli, $haslo_kli);
 
-.logo-container img {
-    width: 150px; 
-}
+    // Execute the query
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-/* Nawigacja */
-nav ul {
-    background: #333;
-    overflow: hidden;
-    color: white;
-    padding: 0;
-    text-align: center;
-}
-nav ul :hover {
-    background-color: #099126;
-}
-
-nav ul li {
-    display: inline;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 15px 20px;
-    display: inline-block;
-}
-
-/* Logowanie */
-.reg-link, .login-link {
-    position: absolute;
-    top: 10px;
-    background-color: #333; 
-    color: #fff; 
-    padding: 5px 12px; 
-    text-decoration: none; 
-    border-radius: 5px; 
-}
-
-.reg-link:hover, .login-link:hover {
-    background-color: #235a93; 
-}
-
-.reg-link {
-    right: 125px;
-}
-
-.login-link {
-    right: 10px;
-}
-
-/* Główna zawartość */
-.offers-container {
-    display: flex;
-    margin: 20px;
-}
-
-.categories-section {
-    flex: 1;
-    padding: 20px;
-}
-
-.offers-section {
-    flex: 3;
-    padding: 20px;
-}
-
-.categories-section ul {
-    list-style-type: none;
-}
-
-.categories-section ul li a {
-    text-decoration: none;
-    color: #333;
-    display: block;
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-}
-.row {
-    display: flex;
-    flex-direction: row; /* upewnij się, że ustawienie jest na rzędach */
-    align-items: flex-start; /* wyrównanie elementów na górze */
-}
-
-.article-section {
-    flex-grow: 2; /* artykuł zajmuje więcej miejsca */
-    padding: 20px;
-}
-
-.map-section {
-    flex-grow: 1; /* mapa zajmuje mniej miejsca */
-    padding: 20px;
-}
-
-.categories-section ul li a:hover {
-    background-color: #f4f4f4;
-}
-
-.search-container {
-    margin-bottom: 20px;
-}
-
-.search-container input[type="text"] {
-    width: 70%;
-    padding: 10px;
-    margin-right: 10px;
-}
-
-.search-container button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.search-container button:hover {
-    background-color: #235a93;
-}
-
-.offers-list {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.offer {
-    width: 30%;
-    margin-right: 3.333%;
-    margin-bottom: 20px;
-}
-
-.offer img {
-    max-width: 100%;
-}
-
-.offer h3 {
-    margin-top: 10px;
-}
-
-/* Stopka */
-footer {
-    text-align: center;
-    padding: 30px 20px;
-    background-color: #333;
-    color: #ffffff;
-}
-
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
+    if ($result->num_rows > 0) {
+        // Login successful
+        // Here, you can start a session and store user info if needed
+        //echo "Login successful";
+    session_start();
+        $_SESSION['user'] = $login_kli; // Store user login in session
+    header("Location: user.php"); // Redirect to user.php
+    } else {
+        // Login failed
+        echo "Invalid login credentials";
     }
 
-    .article-section, .map-section {
-        width: 100%; /* na urządzeniach mobilnych zajmują całą szerokość */
-    }
-    .offers-container {
-        flex-direction: column;
-    }
-
-    .offer {
-        width: 100%;
-        margin-right: 0;
-    }
+    $stmt->close();
 }
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="login-link">Powrót</a>
+    </header>
+    <form action="login.php" method="post">
+        Login: <input type="text" name="login"><br>
+        Password: <input type="password" name="password"><br>
+        <input type="submit" value="Login">
+    </form>
+    
+</body>
+
+
+</html>	
