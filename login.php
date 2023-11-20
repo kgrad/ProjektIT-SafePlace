@@ -1,15 +1,15 @@
 <?php
-include 'db_connection.php'; // Include the database connection file
+include 'db-polaczenie.php'; // Include the database connection file
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login = $_POST['login']; // Get login from form
-    $password = $_POST['password']; // Get password from form
+    $login_kli = $_POST['login']; // Get login from form
+    $haslo_kli = $_POST['password']; // Get password from form
 
     // Prepare a select statement
-    $sql = "SELECT id FROM klient WHERE login = ? AND password = ?";
+    $sql = "SELECT Nr_klienta FROM klient WHERE login_kli = ? AND haslo_kli = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $login, $password);
+    $stmt->bind_param("ss", $login_kli, $haslo_kli);
 
     // Execute the query
     $stmt->execute();
@@ -18,7 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         // Login successful
         // Here, you can start a session and store user info if needed
-        echo "Login successful";
+        //echo "Login successful";
+    session_start();
+        $_SESSION['user'] = $login_kli; // Store user login in session
+    header("Location: user.php"); // Redirect to user.php
     } else {
         // Login failed
         echo "Invalid login credentials";
@@ -50,4 +53,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 
-</html>
+</html>	
