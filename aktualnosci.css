@@ -1,36 +1,52 @@
-/* Stylizacja dla sekcji aktualności */
-.news-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Klienta</title>
+    <link rel="stylesheet" href="styles/user.css">
+</head>
+<body>
+    <header>
+        <h1>Panel Klienta</h1>
+    </header>
 
-.news-item {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
+    <nav>
+        <a href="#rozliczenia">Rozliczenia</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#profil">Profil</a>
+        <a href="#wyloguj" style="float: right;" class="logout-btn">Wyloguj</a>
+    </nav>
 
-.news-item:last-child {
-    border-bottom: none;
-}
+    <section>
+        <h2>Saldo dla poszczególnych sejfów</h2>
+        <div class="saldo">
+            <p><strong>Sejf 1:</strong> 1000.00 PLN</p>
+            <p><strong>Sejf 2:</strong> 500.00 PLN</p>
+        </div>
 
-.news-item h2 {
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.news-item p {
-    color: #666;
-    font-size: 0.9em;
-}
-
-/* Małe dostosowania na urządzeniach mobilnych */
-@media (max-width: 768px) {
-    .news-container {
-        margin: 10px;
-        padding: 10px;
-    }
-}
+        <h2>Transakcje</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Opis</th>
+                    <th>Kwota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-01-01</td>
+                    <td>przelew</td>
+                    <td>500.00 PLN</td>
+                </tr>
+                <tr>
+                    <td>2023-02-15</td>
+                    <td>Opłata za usługę sejfu</td>
+                    <td>50.00 PLN</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
