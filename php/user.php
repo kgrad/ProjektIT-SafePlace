@@ -45,7 +45,7 @@ $stmt_transakcje->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safeplace Dashboard</title>
-    <link rel="stylesheet" href="user.css">
+    <link rel="stylesheet" href="styles/user.css">
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
@@ -68,10 +68,10 @@ $stmt_transakcje->close();
 
     <nav>
         <ul>
-            <li><a href="sejfy.php"><i class="fas fa-shield"></i> Sejfy</a></li>
-            <li><a href="transakcje.php"><i class="fas fa-exchange-alt"></i> Transakcje</a></li>
-            <li><a href="profil.php"><i class="fas fa-wallet"></i> Konto</a></li>
-            <li><a href="ustawienia.php"><i class="fas fa-cogs"></i> Ustawienia</a></li>
+            <li><a href="../php/sejfy.php"><i class="fas fa-shield"></i> Sejfy</a></li>
+            <li><a href="../php/transakcje.php"><i class="fas fa-exchange-alt"></i> Transakcje</a></li>
+            <li><a href="../php/profil.php"><i class="fas fa-wallet"></i> Konto</a></li>
+            <li><a href="../php/ustawienia.php"><i class="fas fa-cogs"></i> Ustawienia</a></li>
         </ul>
     </nav>
 

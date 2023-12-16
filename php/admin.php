@@ -57,14 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
 </head>
 
 <body>
     <header>
-        <a href="login.php" class="login-link">Powrót</a>
+        <a href="../php/login.php" class="login-link">Powrót</a>
     </header>
-    <form action="admin.php" method="post">
+    <form action="../php/admin.php" method="post">
         Login: <input type="text" name="login"><br>
         Password: <input type="password" name="password"><br>
         <input type="submit" value="Login">

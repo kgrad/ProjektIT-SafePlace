@@ -1,0 +1,187 @@
+/* Resetowanie stylów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+/* Logo */
+.logo-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.logo-container img {
+    width: 150px; 
+}
+
+/* Nawigacja */
+nav ul {
+    background: #333;
+    overflow: hidden;
+    color: white;
+    padding: 0;
+    text-align: center;
+}
+nav ul :hover {
+    background-color: #099126;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: inline-block;
+}
+
+/* Logowanie */
+.reg-link, .login-link {
+    position: absolute;
+    top: 10px;
+    background-color: #333; 
+    color: #fff; 
+    padding: 5px 12px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+}
+
+.reg-link:hover, .login-link:hover {
+    background-color: #235a93; 
+}
+
+.reg-link {
+    right: 125px;
+}
+
+.login-link {
+    right: 10px;
+}
+
+/* Główna zawartość */
+.offers-container {
+    display: flex;
+    margin: 20px;
+}
+
+.categories-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.offers-section {
+    flex: 3;
+    padding: 20px;
+}
+
+.categories-section ul {
+    list-style-type: none;
+}
+
+.categories-section ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+.row {
+    display: flex;
+    flex-direction: row; /* upewnij się, że ustawienie jest na rzędach */
+    align-items: flex-start; /* wyrównanie elementów na górze */
+}
+
+.article-section {
+    flex-grow: 2; /* artykuł zajmuje więcej miejsca */
+    padding: 20px;
+}
+
+.map-section {
+    flex-grow: 1; /* mapa zajmuje mniej miejsca */
+    padding: 20px;
+}
+
+.categories-section ul li a:hover {
+    background-color: #f4f4f4;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #235a93;
+}
+
+.offers-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.offer {
+    width: 30%;
+    margin-right: 3.333%;
+    margin-bottom: 20px;
+}
+
+.offer img {
+    max-width: 100%;
+}
+
+.offer h3 {
+    margin-top: 10px;
+}
+
+/* Stopka */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #333;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .article-section, .map-section {
+        width: 100%; /* na urządzeniach mobilnych zajmują całą szerokość */
+    }
+    .offers-container {
+        flex-direction: column;
+    }
+
+    .offer {
+        width: 100%;
+        margin-right: 0;
+    }
+}

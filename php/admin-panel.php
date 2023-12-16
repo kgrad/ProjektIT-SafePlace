@@ -54,7 +54,7 @@ $result_info_zespolu = $conn->query($sql_info_zespolu);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safeplace Admin Dashboard</title>
-    <link rel="stylesheet" href="admin-panel.css">
+    <link rel="stylesheet" href="../styles/admin-panel.css">
     <!-- Font Awesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <style>
@@ -69,7 +69,7 @@ $result_info_zespolu = $conn->query($sql_info_zespolu);
     <header>
         <div class="logo">SafePlace</div>
         <div class="user-info">
-            <img src="user-avatar.jpg" alt="User Avatar">
+            <img src="../images/admin-avatar.jpg" alt="admin Avatar">
             <span>Pracownik</span>
             <div>
                 <form method="post" action="logout.php" style="display: inline;">
@@ -83,7 +83,7 @@ $result_info_zespolu = $conn->query($sql_info_zespolu);
         <section>
             <h3>Lista Sejfów</h3>
             <?php
-            include 'db-polaczenie.php';
+            include '../php/db-polaczenie.php';
             if ($result_sejfy_klienta->num_rows > 0) {
                 while ($row_sejf = $result_sejfy_klienta->fetch_assoc()) {
                     echo '<div class="tile">';

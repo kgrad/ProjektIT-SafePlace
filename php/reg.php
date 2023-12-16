@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
-    <link rel="stylesheet" href="reg.css" />
+    <link rel="stylesheet" href="../styles/reg.css" />
 </head>
 
 <body>
     <header>
-        <a href="index.html" class="login-link">Powrót</a>
+        <a href="../html/index.html" class="login-link">Powrót</a>
     </header>
     <form autocomplete="off" action="reg.php" method="post">
    Imię: <input type="text" name="imie" ><br>

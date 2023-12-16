@@ -54,15 +54,15 @@ $stmt_nr_klienta->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="styles/login.css" />
 </head>
 
 <body>
     <header>
-        <a href="index.html" class="login-link">Powrót</a>
-        <a href="admin.php" class="admin-link">Logowania dla pracownika</a>
+        <a href="../php/login.php" class="login-link">Powrót</a>
+        <a href="../php/admin.php" class="admin-link">Logowania dla pracownika</a>
     </header>
-    <form action="login.php" method="post">
+    <form action="../php/login.php" method="post">
         Login: <input type="text" name="login"><br>
         Password: <input type="password" name="password"><br>
         <input type="submit" value="Login">
