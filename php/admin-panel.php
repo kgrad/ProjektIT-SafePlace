@@ -1,72 +1,71 @@
 <?php
+include 'db-polaczenie.php'; // Make sure this file correctly sets up the connection to your database.
 
-include 'db-polaczenie.php';
+session_start();
 
-
-$nr_zespolu = 0;
-$id_wydzialu = 0;
-$nr_pracownika = 1;
-$sql_nr_zespolu = "SELECT NR_zesp FROM pracownik WHERE NR_prac = $nr_pracownika";
-$result_nr_zespolu = $conn->query($sql_nr_zespolu);
-
-if ($result_nr_zespolu) {
-    // Pobierz wynik
-    $row_nr_zespolu = $result_nr_zespolu->fetch_assoc();
-
-    // Teraz użyj pobranej wartości w następnym zapytaniu
-    $nr_zespolu = $row_nr_zespolu['NR_zesp'];
-    //echo''.$nr_zespolu.'';
-    $sql_info_zespolu = "SELECT ID_wydzialu FROM zespoly WHERE Nr_zespolu = $nr_zespolu";
-    $result_info_zespolu = $conn->query($sql_info_zespolu);
-
-    // Reszta twojego kodu...
-} else {
-    echo "Błąd w pierwszym zapytaniu.";
+// Sprawdź, czy użytkownik jest zalogowany
+if (!isset($_SESSION['pracownik'])) {
+    header("Location: admin.php"); // Przekieruj do strony logowania, jeśli nie jest zalogowany
+    exit();
 }
 
-// Pobranie ID wydziału 
-$sql_info_zespolu = "SELECT ID_wydzialu FROM zespoly WHERE Nr_zespolu = $nr_zespolu";
-$result_info_zespolu = $conn->query($sql_info_zespolu);
+// Pobierz Nr_prac i NR_zesp z sesji
+$nr_pracownika = $_SESSION['pracownik']['Nr_prac'];
+$nr_zespolu_pracownika = $_SESSION['pracownik']['NR_zesp'];
 
+// Get the department ID of the employee
+$sql = "SELECT ID_wydzialu FROM zespoly WHERE Nr_zespolu = $nr_zespolu_pracownika";
+$result = $conn->query($sql);
+$id_wydzialu = $result->fetch_assoc()['ID_wydzialu'];
 
+// Get clients in the same department
+$sql_klienci = "SELECT * FROM klient WHERE Nr_wydzialu = $id_wydzialu";
+$result_klienci = $conn->query($sql_klienci);
 
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_sejfu = $_POST['id_sejfu'];
+    $kwota = $_POST['kwota'];
+    $id_pracownika = $_POST['id_pracownika']; // You can also dynamically fetch this based on logged-in user
 
-    $row_info_zespolu = $result_info_zespolu->fetch_assoc();
-    $id_wydzialu = $row_info_zespolu["ID_wydzialu"];
+    // Start transaction
+    $conn->begin_transaction();
 
-    // Pobranie informacji o sejfach klienta z danego wydziału
-   $sql_sejfy_klienta = "SELECT * FROM sejf WHERE Nr_klienta IN (SELECT Nr_klienta FROM klient WHERE Nr_wydzialu = $id_wydzialu)";
-    $result_sejfy_klienta = $conn->query($sql_sejfy_klienta);
+    try {
+        // Insert transaction
+        $sql_transakcja = "INSERT INTO transakcje (Kwota, Id_sejfu, Data_transakcji, Id_pracownika) VALUES ('$kwota', '$id_sejfu', NOW(), '$id_pracownika')";
+        $conn->query($sql_transakcja);
 
-/////////////////////////////////////////////////////////////////////////
-    $klient = "SELECT * FROM klient k WHERE k.Nr_wydzialu = $id_wydzialu";
-    $result_klient = $conn->query($klient);
+        // Update balance in sejf
+        $sql_update_balance = "UPDATE sejf SET Stan_konta = Stan_konta + $kwota WHERE ID_sejfu = $id_sejfu";
+        $conn->query($sql_update_balance);
 
+        // Commit transaction
+        $conn->commit();
 
-
-
+        echo "Transaction recorded and balance updated successfully";
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollback();
+        echo "Error: " . $e->getMessage();
+    }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safeplace Admin Dashboard</title>
-    <link rel="stylesheet" href="../styles/admin-panel.css">
-    <!-- Font Awesome CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <title>Dashboard</title>
     <style>
-        /* Add style for hiding categories at the start */
-        .hidden {
-            display: none;
-        }
+        body { font-family: Arial, sans-serif; }
+        .tile { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; cursor: pointer; }
+        .form-container { display: none; }
     </style>
+<link rel="stylesheet" href="../styles/admin-panel.css">
 </head>
 <body>
-    
-    <header>
+<header>
         <div class="logo">SafePlace</div>
         <div class="user-info">
             <img src="../images/admin-avatar.jpg" alt="admin Avatar">
@@ -78,39 +77,47 @@ $result_info_zespolu = $conn->query($sql_info_zespolu);
             </div>
         </div>
     </header>
+    <h2>Klienci w tym samym wydziale</h2>
 
-    <main>
-        <section>
-            <h3>Lista Sejfów</h3>
-            <?php
-            include '../php/db-polaczenie.php';
-            if ($result_sejfy_klienta->num_rows > 0) {
-                while ($row_sejf = $result_sejfy_klienta->fetch_assoc()) {
-                    echo '<div class="tile">';
-                    echo '<h3>ID Sejfu: ' . $row_sejf["ID_sejfu"] . '</h3>';
-                    echo '<p>Stan konta: ' . $row_sejf["Stan_konta"] . '</p>';
-                    echo '<p>Nazwa sejfu: ' . $row_sejf["Nazwa_sejfu"] . '</p>';
-                    echo '</div>';
-                }
-            } else {
-                echo "<p>Brak danych o sejfach klienta z tego wydziału.</p>";
+    <!-- List of clients -->
+    <div id="clients">
+        <?php while($row = $result_klienci->fetch_assoc()): ?>
+            <div class="tile" onclick="document.getElementById('form-container-<?php echo $row['Nr_klienta']; ?>').style.display='block'">
+                <p><?php echo $row['Imie_kli']." ".$row['Nazw_kli']; ?></p>
+            </div>
+            <!-- Hidden form for each client -->
+            <div id="form-container-<?php echo $row['Nr_klienta']; ?>" class="form-container">
+                <h3>Transakcje dla klienta: <?php echo $row['Imie_kli']." ".$row['Nazw_kli']; ?></h3>
+                <form method="post">
+                    <input type="hidden" name="id_pracownika" value="<?php echo $nr_pracownika; ?>">
+                    <label for="id_sejfu">Wybierz Sejf:</label>
+                    <select name="id_sejfu" required>
+                        <?php
+                        $nr_klienta = $row['Nr_klienta'];
+                        $sql_sejfy = "SELECT * FROM sejf WHERE Nr_klienta = $nr_klienta";
+                        $result_sejfy = $conn->query($sql_sejfy);
+                        while ($sejf = $result_sejfy->fetch_assoc()) {
+                            echo "<option value='".$sejf['ID_sejfu']."'>".$sejf['ID_sejfu']."</option>";
+                        }
+                        ?>
+                    </select><br>
+                    <label for="kwota">Kwota:</label>
+                    <input type="number" name="kwota" required><br>
+                    <button type="submit">Wyślij</button>
+                </form>
+            </div>
+        <?php endwhile; ?>
+    </div>
+
+    <script>
+        function hideForms() {
+            var forms = document.getElementsByClassName('form-container');
+            for(var i = 0; i < forms.length; i++) {
+                forms[i].style.display = 'none';
             }
-            ?>
-        </section>
-
-        <section>
-            <h3>Lista Klientów</h3>
-            <?php while ($row_klient = $result_klient->fetch_assoc()): ?>
-                <div class="tile">
-                    <h3>Imię: <?php echo $row_klient["Imie_kli"]; ?></h3>
-                    <h3>Nazwisko: <?php echo $row_klient["Nazw_kli"]; ?></h3>
-                    <h3>Numer klienta: <?php echo $row_klient["Nr_klienta"]; ?></h3>
-                </div>
-            <?php endwhile; ?>
-        </section>
-    </main>
-
-    <?php $conn->close(); ?>
+        }
+        window.onload = hideForms;
+    </script>
 
 </body>
-</html>
+</html>	
