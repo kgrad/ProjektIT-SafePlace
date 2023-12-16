@@ -61,24 +61,18 @@ $stmt_transakcje->close();
                     <button type="submit" name="logout" class="logout-asd">Wyloguj</button>
                 </form>
             </div>
+            <a href="../php/ustawienia.php"><i class="fas fa-cogs"></i> Ustawienia</a>
         
         </div>
         
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="../php/sejfy.php"><i class="fas fa-shield"></i> Sejfy</a></li>
-            <li><a href="../php/transakcje.php"><i class="fas fa-exchange-alt"></i> Transakcje</a></li>
-            <li><a href="../php/profil.php"><i class="fas fa-wallet"></i> Konto</a></li>
-            <li><a href="../php/ustawienia.php"><i class="fas fa-cogs"></i> Ustawienia</a></li>
-        </ul>
-    </nav>
+    
 
     <main>
         <section class="overview">
             <div class="recent-transactions">
-                <h3>Recent Transactions</h3>
+                <h3>Transakcje</h3>
                 <ul>
                     <?php while ($transakcja = $result_transakcje->fetch_assoc()): ?>
                 <div class="tile">
@@ -91,7 +85,7 @@ $stmt_transakcje->close();
         </section>
 
         <section class="quick-actions">
-            <h2>Saldo</h2>
+            <h2>Salda</h2>
             <div class="tile-container">
                 <?php while ($sejf = $result_sejf->fetch_assoc()): ?>
                     <div class="tile">
@@ -102,17 +96,7 @@ $stmt_transakcje->close();
             </div>
         </section>
 
-        <section class="quick-actions">
-            <h2>Quick Actions</h2>
-            <div class="action">
-                <i class="fas fa-exchange-alt"></i>
-                <p>Wykonaj transakcje</p>
-            </div>
-            <div class="action">
-                <i class="fas fa-wallet"></i>
-                <p>Otwórz nowy sejf</p>
-            </div>
-        </section>
+        
 
     </main>
 
