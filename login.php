@@ -20,7 +20,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Here, you can start a session and store user info if needed
         //echo "Login successful";
     session_start();
-        $_SESSION['user'] = $login_kli; // Store user login in session
+        // Pobierz Nr_klienta na podstawie loginu
+$sql_nr_klienta = "SELECT Nr_klienta FROM klient WHERE login_kli = ?";
+$stmt_nr_klienta = $conn->prepare($sql_nr_klienta);
+$stmt_nr_klienta->bind_param("s", $login_kli);
+$stmt_nr_klienta->execute();
+$result_nr_klienta = $stmt_nr_klienta->get_result();
+
+if ($result_nr_klienta->num_rows > 0) {
+    $row_nr_klienta = $result_nr_klienta->fetch_assoc();
+    $_SESSION['user'] = $row_nr_klienta['Nr_klienta'];
+} else {
+    echo "Błąd: Brak danych dla klienta o loginie: " . $login_kli;
+    exit();
+}
+
+// Zamknij połączenie
+$stmt_nr_klienta->close();
+
     header("Location: user.php"); // Redirect to user.php
     } else {
         // Login failed
@@ -43,14 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <a href="index.html" class="login-link">Powrót</a>
+        <a href="admin.php" class="admin-link">Logowania dla pracownika</a>
     </header>
     <form action="login.php" method="post">
         Login: <input type="text" name="login"><br>
         Password: <input type="password" name="password"><br>
         <input type="submit" value="Login">
     </form>
-    
 </body>
-
-
-</html>	
+</html>
