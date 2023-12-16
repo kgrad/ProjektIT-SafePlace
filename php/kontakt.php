@@ -26,7 +26,7 @@
 
     <!-- Przyciski logowania/rejestracji -->
     <header>
-        <a href="../html/reg.html" class="reg-link">Załóż konto</a>
+        <a href="../php/reg.php" class="reg-link">Załóż konto</a>
         <a href="../php/login.php" class="login-link">Zaloguj się</a>
     </header>
 
