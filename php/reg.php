@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <header>
-        <a href="../html/index.html" class="login-link">Powrót</a>
+        <a href="../index.html" class="login-link">Powrót</a>
     </header>
     <form autocomplete="off" action="reg.php" method="post">
    Imię: <input type="text" name="imie" ><br>

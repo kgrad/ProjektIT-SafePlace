@@ -17,7 +17,7 @@
     <!-- Nawigacja -->
     <nav>
         <ul>
-            <li><a href="../html/index.html">Strona główna</a></li>
+            <li><a href="../index.html">Strona główna</a></li>
             <li><a href="../html/oferta.html">Oferta</a></li>
             <li><a href="../html/aktualnosci.html">Aktualności</a></li>
             <li><a href="../php/kontakt.php">Kontakt</a></li>
