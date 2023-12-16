@@ -47,12 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="../index.html" class="login-link">Powrót</a>
     </header>
     <form autocomplete="off" action="reg.php" method="post">
-   Imię: <input type="text" name="imie" ><br>
-   Nazwisko: <input type="text" name="nazwisko" ><br>
-   Pesel: <input type="text" name="pesel" ><br>
-   Login: <input type="text" name="login" ><br>
-   Hasło: <input type="password" name="haslo" ><br>
-   Email: <input type="email" name="mail" ><br>
+   Imię: <input type="text" name="imie" required><br>
+   Nazwisko: <input type="text" name="nazwisko"required ><br>
+   Pesel: <input type="text" name="pesel"required ><br>
+   Login: <input type="text" name="login"required ><br>
+   Hasło: <input type="password" name="haslo"required ><br>
+   Email: <input type="email" name="mail"required ><br>
    <input type="submit" value="Zarejestruj">
     </form>
 
