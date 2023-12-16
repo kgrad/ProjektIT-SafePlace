@@ -26,7 +26,7 @@ $stmt_sejf->execute();
 $result_sejf = $stmt_sejf->get_result();
 
 // Pobierz transakcje dla danego klienta
-$sql_transakcje = "SELECT Data_transakcji, Kwota FROM transakcje WHERE id_sejfu IN (SELECT ID_sejfu FROM sejf WHERE Nr_klienta = ?)";
+$sql_transakcje = "SELECT Data_transakcji, Kwota, Id_sejfu FROM transakcje WHERE id_sejfu IN (SELECT ID_sejfu FROM sejf WHERE Nr_klienta = ?)";
 $stmt_transakcje = $conn->prepare($sql_transakcje);
 $stmt_transakcje->bind_param("s", $nr_klienta);
 $stmt_transakcje->execute();
@@ -61,7 +61,7 @@ $stmt_transakcje->close();
                     <button type="submit" name="logout" class="logout-asd">Wyloguj</button>
                 </form>
             </div>
-            <a href="../php/ustawienia.php"><i class="fas fa-cogs"></i> Ustawienia</a>
+            
         
         </div>
         
@@ -76,6 +76,7 @@ $stmt_transakcje->close();
                 <ul>
                     <?php while ($transakcja = $result_transakcje->fetch_assoc()): ?>
                 <div class="tile">
+                    <p class="transaction-type deposit">ID sejfu: <?php echo $transakcja['Id_sejfu']; ?></p>
                     <p class="transaction-type deposit">Data transakcji: <?php echo $transakcja['Data_transakcji']; ?></p>
                     <p class="transaction-type deposit">Kwota: <?php echo $transakcja['Kwota']; ?> PLN</p>
                 </div>
@@ -89,7 +90,7 @@ $stmt_transakcje->close();
             <div class="tile-container">
                 <?php while ($sejf = $result_sejf->fetch_assoc()): ?>
                     <div class="tile">
-                        <li class="transaction-type deposit"><span>Sejf:</span> <?php echo $sejf['Nazwa_sejfu']; ?></li>
+                        <li class="transaction-type deposit"><span>Sejf:</span> <?php echo $sejf['ID_sejfu']; ?></li>
                         <li class="transaction-type deposit"><span>Stan stan:</span> <?php echo $sejf['Stan_konta']; ?> PLN</li>
                     </div>
                 <?php endwhile; ?>

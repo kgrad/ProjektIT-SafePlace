@@ -93,7 +93,10 @@ main {
     flex: 1;
     margin-right: 20px;
 }
-
+.tile {
+    background-color: antiquewhite;
+    margin-bottom: 10px;
+}
 .balance p {
     font-size: 1.2em;
     margin-top: 10px;
@@ -115,7 +118,7 @@ main {
 }
 
 .deposit {
-    background-color: #a1eaa4;
+    
     color: #03841d;
 }
 
