@@ -1,52 +1,41 @@
 <?php
-include 'db-polaczenie.php'; // Include the database connection file
+include 'db-polaczenie.php'; // Dołącz plik z połączeniem do bazy danych
 
-// Check if the form is submitted
+// Sprawdź, czy formularz został przesłany
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login_prac = $_POST['login']; // Get login from form
-    $haslo_prac = $_POST['password']; // Get password from form
+    $login_prac = $_POST['login']; // Pobierz login z formularza
+    $haslo_prac = $_POST['password']; // Pobierz hasło z formularza
 
-    // Prepare a select statement
-    $sql = "SELECT NR_prac FROM pracownik WHERE login_prac = ? AND haslo_prac = ?";
+    // Przygotuj zapytanie SELECT
+    $sql = "SELECT * FROM pracownik WHERE login_prac = ? AND haslo_prac = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $login_prac, $haslo_prac);
 
-    // Execute the query
+    // Wykonaj zapytanie
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Login successful
-        // Here, you can start a session and store user info if needed
+        // Logowanie udane
         session_start();
 
-        // Pobierz Nr_prac na podstawie loginu
-        $sql_nr_prac = "SELECT NR_prac FROM pracownik WHERE login_prac = ?";
-        $stmt_nr_prac = $conn->prepare($sql_nr_prac);
-        $stmt_nr_prac->bind_param("s", $login_prac);
-        $stmt_nr_prac->execute();
-        $result_nr_prac = $stmt_nr_prac->get_result();
-
-        if ($result_nr_prac->num_rows > 0) {
-            $row_nr_prac = $result_nr_prac->fetch_assoc();
-            $_SESSION['admin'] = $row_nr_prac['NR_prac'];
-        } else {
-            echo "Błąd: Brak danych dla pracownika o loginie: " . $login_prac;
-            exit();
-        }
+        // Pobierz wszystkie dane pracownika na podstawie loginu
+        $_SESSION['pracownik'] = $result->fetch_assoc();
 
         // Zamknij połączenie
-        $stmt_nr_prac->close();
-        header("Location: admin-panel.php"); // Redirect to admin-panel.php
+        $stmt->close();
+        $conn->close(); // Zamknij połączenie z bazą danych
+
+        header("Location: admin-panel.php"); // Przekieruj do admin-panel.php
         exit(); // Dodaj exit(), aby zakończyć wykonywanie skryptu po przekierowaniu
     } else {
-        // Login failed
-        echo "Invalid login credentials";
+        // Logowanie nieudane
+        echo "Nieprawidłowe dane logowania";
     }
 
     // Zamknij połączenie
     $stmt->close();
-    $conn->close(); // Dodaj zamknięcie połączenia
+    $conn->close(); // Zamknij połączenie z bazą danych
 }
 ?>
 
