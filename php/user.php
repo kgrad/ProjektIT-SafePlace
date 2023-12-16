@@ -45,7 +45,7 @@ $stmt_transakcje->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safeplace Dashboard</title>
-    <link rel="stylesheet" href="styles/user.css">
+    <link rel="stylesheet" href="../styles/user.css">
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
@@ -54,7 +54,7 @@ $stmt_transakcje->close();
     <header>
         <div class="logo">SafePlace</div>
         <div class="user-info">
-            <img src="user-avatar.jpg" alt="User Avatar">
+            <img src="../images/user-avatar.jpg" alt="User Avatar">
             <span>Welcome, <?php echo $informacje_klienta['Imie_kli']; ?></span>
             <div>
                 <form method="post" action="logout.php" style="display: inline;">
